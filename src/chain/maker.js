@@ -14,7 +14,11 @@ export default async function createMaker(
   backendEnv
 ) {
   const config = {
-    plugins: [trezorPlugin, ledgerPlugin, [governancePlugin, { network }]],
+    plugins: [
+      trezorPlugin,
+      ledgerPlugin,
+      [governancePlugin, { network, staging: true }]
+    ],
     autoAuthenticate: true,
     log: false,
     provider: {
