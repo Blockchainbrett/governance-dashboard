@@ -89,6 +89,7 @@ const BannerLink = styled.a`
   font-weight: bold;
 `;
 
+const DEV_USE_MIGRATION_BANNER = false;
 const HIDE_MIGRATION_BANNER_KEY = 'hide-migration-banner-0.1.0';
 
 const hasHiddenMigrationBanner = JSON.parse(
@@ -183,9 +184,11 @@ const Timeline = ({
   );
   otherProposals.sort((a, b) => b.end_timestamp - a.end_timestamp);
 
+  const MCD_SOURCE = '0xF44113760c4f70aFeEb412C63bC713B13E6e202E';
+
   return (
     <Fragment>
-      <MigrationNotificationBanner />
+      {DEV_USE_MIGRATION_BANNER ? <MigrationNotificationBanner /> : null}
       <VoterStatus signaling={signaling} legacy={true} />
       <RiseUp key={otherProposals.toString()}>
         {signaling || !hatProposal ? null : (
@@ -221,7 +224,11 @@ const Timeline = ({
                     )} MKR`}</Tag>
                   ) : (
                     <div>
-                      <Tag>Available for execution</Tag>
+                      <Tag>
+                        {hatProposal.source === MCD_SOURCE
+                          ? 'Available for execution on November 18th at 16:00 UTC'
+                          : 'Available for execution'}
+                      </Tag>
                     </div>
                   )}
                 </div>
@@ -276,7 +283,11 @@ const Timeline = ({
                   </div>
                 ) : hat.approvals < approvals.approvals[proposal.source] ? (
                   <div>
-                    <Tag>Available for execution</Tag>
+                    <Tag>
+                      {proposal.source === MCD_SOURCE
+                        ? 'Available for execution on November 18th at 16:00 UTC'
+                        : 'Available for execution'}
+                    </Tag>
                   </div>
                 ) : null}
               </ProposalDetails>

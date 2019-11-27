@@ -164,15 +164,21 @@ const BaseLayout = ({
               <StyledLinkWrapper>
                 <StyledLink
                   to={{ pathname: '/', search: location.search }}
-                  r={107}
+                  r={207}
                 >
                   Executive
                 </StyledLink>
                 <StyledLink
                   to={{ pathname: '/polling', search: location.search }}
-                  r={6}
+                  r={106}
                 >
                   Polling
+                </StyledLink>
+                <StyledLink
+                  to={{ pathname: '/modules', search: location.search }}
+                  r={6}
+                >
+                  Modules
                 </StyledLink>
               </StyledLinkWrapper>
               <DimHeaderElement
